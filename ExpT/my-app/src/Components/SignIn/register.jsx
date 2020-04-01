@@ -1,12 +1,9 @@
 import React from "react";
-import axios from "axios";
+import {saveUser} from '../../Service/registerService';
 
 export class Register extends React.Component{
     constructor(props){
         super(props);
-       /* const validEmailRegex = 
-  RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-  */
         this.onChangefName = this.onChangefName.bind(this);
         this.onChangelName = this.onChangelName.bind(this);
         this.onChangeemail = this.onChangeemail.bind(this);
@@ -51,17 +48,14 @@ export class Register extends React.Component{
             email : this.state.email,
             password : this.state.password
         }
-        
-        console.log(e.target);
-        axios.post('http://localhost:5000/api/register',user)
-        .then(res => {console.log(res); alert(res.data.success);})
-        .catch(res => alert(res.success));
+        saveUser.bind(user);
         this.setState({
             firstName : '',
             lastName : '',
             email : '',
             password : ''
-        })  
+        })
+         
     } 
     
 
@@ -85,7 +79,7 @@ export class Register extends React.Component{
                     </div>
                     <div className="form-group">
                         <label htmlFor="password"> Password </label>
-                        <input type="text" required name="password" value={this.state.password} onChange={this.onChangepass} placeholder="Password"></input>
+                        <input type="password" required name="password" value={this.state.password} onChange={this.onChangepass} placeholder="Password"></input>
                     </div>
                     <div className="form-group">
                     <button type="Submit" className="FormField__Button">Register</button>
